@@ -1,0 +1,24 @@
+{
+    "vercao": "0.1.0",
+    "descricao": "Iniciando os projetos e definicdo conceitos",
+    "detalhes": [
+        {
+            "status": "Finalizados",
+            "descricao": [
+                "Criação do projeto inicial",
+                "Definiçao do inicio!",
+                "Mecanica de login/ cadastro",
+                "Salvamento de dados direto no server (temporario)"
+            ]
+        },
+        {
+            "status": "Em andamento",
+            "descricao": [
+                "Criação do sistema de Perfil",
+                "Criação do sistema de Visualizar perfil de amigos",
+                "Criação do sistema de adicionar amigos",
+                "Criação do sistema de adicionar amigos por QR code (desafio pessoal)"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,96 @@
+body {
+    background-image: url('https://img.freepik.com/free-photo/glowing-sky-sphere-orbits-starry-galaxy-generated-by-ai_188544-15599.jpg?t=st=1744985761~exp=1744989361~hmac=a04f8a5fc8b756e9884f22e0e2752933315fc9d2d1cc5a40088d21ac7f935d33&w=996');
+    background-attachment: fixed;
+    background-size: cover; /* Ajusta a imagem ao tamanho da tela */
+    background-position: center center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Orbitron', sans-serif;
+    color: #FFFFFF;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+.header {
+    background-color: rgba(10, 10, 30, 0.9);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #00ffff;
+    box-shadow: 0 0 10px #00ffff30;
+}
+
+.header h1 {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #00ffff;
+    bottom: 0;
+    left: 50%;
+    transition: 0.3s;
+    transform: translateX(-50%);
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+nav ul li a:hover {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+}
+
+
+.Container {
+    text-align: center;
+    color: #fff;
+    padding: 40px;
+    font-size: 18px;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
