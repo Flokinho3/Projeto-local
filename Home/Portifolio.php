@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfólio - Thiago</title>
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 text-white font-sans">
@@ -12,6 +13,7 @@
         <div class="max-w-6xl mx-auto flex justify-between items-center">
         <h1 class="text-3xl font-bold">Thiago.dev</h1>
         <nav class="space-x-6">
+            <a href="Home.php" class="hover:text-purple-400">Home</a>
             <a href="#projetos" class="hover:text-purple-400">Projetos</a>
             <a href="#sobre" class="hover:text-purple-400">Sobre</a>
             <a href="#contato" class="hover:text-purple-400">Contato</a>
@@ -34,9 +36,9 @@
             <a href="https://github.com/Flokinho3/Projeto-local.git" class="text-purple-400 hover:underline">Ver mais</a>
         </div>
         <div class="bg-gray-800 p-6 rounded-xl shadow hover:scale-105 transition">
-            <h4 class="text-xl font-semibold mb-2">Visual Novel Engine</h4>
-            <p class="text-gray-400 text-sm mb-4">Sistema dinâmico de exibição de personagens e cenários via JSON.</p>
-            <a href="#" class="text-purple-400 hover:underline">Ver mais</a>
+            <h4 class="text-xl font-semibold mb-2">Ia pessoal (Via cmd)</h4>
+            <p class="text-gray-400 text-sm mb-4">Ia pessoal leve e eficiente</p>
+            <a href="https://github.com/Flokinho3/Ia-pessoal-Gemine.git" class="text-purple-400 hover:underline">Ver mais</a>
         </div>
         <div class="bg-gray-800 p-6 rounded-xl shadow hover:scale-105 transition">
             <h4 class="text-xl font-semibold mb-2">Em breve...</h4>
@@ -56,9 +58,8 @@
     <h3 class="text-3xl font-bold mb-6">Vamos trocar uma ideia? ✉️</h3>
     <p class="text-gray-400 mb-4">Me chama no e-mail ou nas redes sociais:</p>
     <div class="space-x-4">
-        <a href="mailto:seuemail@example.com" class="text-purple-400 hover:underline">Email</a>
-        <a href="https://github.com/seuuser" target="_blank" class="text-purple-400 hover:underline">GitHub</a>
-        <a href="https://linkedin.com/in/seuuser" target="_blank" class="text-purple-400 hover:underline">LinkedIn</a>
+        <a href="mailto:thiagosiegamg@gmail.com" class="text-purple-400 hover:underline">Email</a>
+        <a href="https://github.com/Flokinho3" target="_blank" class="text-purple-400 hover:underline">GitHub</a>
     </div>
 </section>
 
