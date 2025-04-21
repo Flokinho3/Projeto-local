@@ -31,7 +31,7 @@
         <div class="bg-gray-800 p-6 rounded-xl shadow hover:scale-105 transition">
             <h4 class="text-xl font-semibold mb-2">Site Web Ativo!</h4>
             <p class="text-gray-400 text-sm mb-4">Login, cadastro, exibição de perfil com imagem. PHP + PostgreSQL.</p>
-            <a href="#" class="text-purple-400 hover:underline">Ver mais</a>
+            <a href="https://github.com/Flokinho3/Projeto-local.git" class="text-purple-400 hover:underline">Ver mais</a>
         </div>
         <div class="bg-gray-800 p-6 rounded-xl shadow hover:scale-105 transition">
             <h4 class="text-xl font-semibold mb-2">Visual Novel Engine</h4>
