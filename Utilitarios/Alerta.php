@@ -11,5 +11,9 @@ if (isset($_SESSION['alert'])) {
     // limpa a mensagem da sessão
     unset($_SESSION['alert']);
 }
+// exempo de uso
+// $_SESSION['alert'] = "Mensagem de teste!";
+// header("Location: ../index.php"); // Redireciona para a página de login
+// exit(); // Encerra o script
 
 ?>

@@ -125,6 +125,7 @@ if ($jsonData === null) {
                 <li><a href="../index.php">Início</a></li>
                 <li><a href="Home.php">Home</a></li>
                 <li><a href="Update.php">Atualizaçoes</a></li>
+                <li><a href="Portifolio.php">Portifolio</a></li>
                 <li><a href="../Server/Porteiro.php?logout=true">Sair</a></li>
             </ul>
         </nav>

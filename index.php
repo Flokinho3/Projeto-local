@@ -6,7 +6,7 @@ session_start();
 
 include_once 'Utilitarios/Alerta.php'; // Include the database connection file
 
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['User'])) {
     header("Location: Home/Home.php"); // Redirect to the home page if already logged in
     exit();
 }
@@ -21,6 +21,7 @@ if (isset($_SESSION['username'])) {
     <title>Login</title>
     <link rel="stylesheet" href="CSS/Entrada.css?=<?php echo time(); ?>">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
 </head>
 <body>
     <div class="container">

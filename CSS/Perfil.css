@@ -1,0 +1,325 @@
+/* Perfil.css - Refactored while maintaining cyberpunk theme */
+
+/* Base styles */
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: radial-gradient(ellipse at bottom, #0d0d1a 0%, #000000 100%);
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header styling */
+.header {
+    background-color: rgba(20, 20, 40, 0.9);
+    padding: 20px;
+    border-bottom: 1px solid #3f3f70;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.header h1 {
+    text-align: center;
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+/* Navigation menu */
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+nav ul li a:hover {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #00ffff;
+    bottom: -5px;
+    left: 50%;
+    transition: 0.3s;
+    transform: translateX(-50%);
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Logout button styling */
+nav ul li a[href="../Server/Porteiro.php?logout=true"] {
+    color: #ff0000;
+}
+
+nav ul li a[href="../Server/Porteiro.php?logout=true"]:hover {
+    color: #ff0000;
+    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
+}
+
+/* Main content container */
+.Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px;
+    gap: 30px;
+    flex-grow: 1;
+}
+
+/* User profile container */
+.User {
+    background: rgba(20, 20, 40, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+    width: 80%;
+    max-width: 500px;
+    backdrop-filter: blur(5px);
+    transition: 0.3s;
+}
+
+.User:hover {
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+}
+
+.User-Info {
+    text-align: center;
+}
+
+.User-Info h2 {
+    color: #00ffff;
+    margin-bottom: 10px;
+    font-size: 24px;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+.User-Info p {
+    font-size: 18px;
+    color: #ccc;
+}
+
+/* Profile image styling */
+.User-Image img.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #00ffff;
+    box-shadow: 0 0 15px #00ffff90;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+/* Carousel Container - FIXED */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 30px auto;
+    overflow: hidden;
+    border: 2px solid #00ffff50;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #00ffff40;
+    background-color: rgba(10, 10, 30, 0.6);
+    padding: 20px;
+}
+
+.carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+}
+
+.carousel-item {
+    flex: 0 0 100%;
+    min-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.carousel-item img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    margin-bottom: 15px;
+}
+
+/* Carousel navigation buttons */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #00ffff10;
+    border: 1px solid #00ffff;
+    color: #00ffff;
+    font-size: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.carousel-button:hover {
+    background-color: #00ffff30;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+#prev {
+    left: 10px;
+}
+
+#next {
+    right: 10px;
+}
+
+/* Carousel action buttons */
+.carousel-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-carousel {
+    background-color: #00ffff20;
+    border: 1px solid #00ffff;
+    color: #00ffff;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.btn-carousel:hover {
+    background-color: #00ffff40;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+.btn-remove {
+    background-color: rgba(255, 68, 68, 0.2);
+    border: 1px solid #ff4444;
+    color: #ff4444;
+}
+
+.btn-remove:hover {
+    background-color: rgba(255, 68, 68, 0.4);
+    box-shadow: 0 0 10px #ff4444;
+}
+
+/* Add image section */
+.Add_img {
+    width: 100%;
+    max-width: 500px;
+    margin: 30px auto;
+    background-color: rgba(10, 10, 30, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #00ffff50;
+    box-shadow: 0 0 20px #00ffff30;
+    text-align: center;
+}
+
+.Add_img h2 {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+    margin-bottom: 15px;
+}
+
+.Add_img form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Add_img form input[type="file"] {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #00ffff;
+    background-color: #00ffff10;
+    color: #00ffff;
+    width: 80%;
+    max-width: 300px;
+}
+
+.Add_img form input[type="submit"] {
+    margin: 10px 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #00ffff;
+    background-color: #00ffff20;
+    color: #00ffff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.Add_img form input[type="submit"]:hover {
+    background-color: #00ffff40;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .Container {
+        padding: 20px;
+    }
+
+    .User {
+        width: 90%;
+    }
+    
+    .carousel-item img {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .Add_img, .carousel-container {
+        padding: 15px;
+        width: 90%;
+    }
+    
+    .carousel-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-carousel {
+        width: 100%;
+        margin: 5px 0;
+    }
+}

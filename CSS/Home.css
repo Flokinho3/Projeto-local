@@ -1,3 +1,4 @@
+/* Estilo geral */
 body {
     background-image: url('https://img.freepik.com/free-photo/glowing-sky-sphere-orbits-starry-galaxy-generated-by-ai_188544-15599.jpg?t=st=1744985761~exp=1744989361~hmac=a04f8a5fc8b756e9884f22e0e2752933315fc9d2d1cc5a40088d21ac7f935d33&w=996');
     background-attachment: fixed;
@@ -10,7 +11,6 @@ body {
     height: 100vh;
     overflow: hidden;
 }
-
 
 .header {
     background-color: rgba(10, 10, 30, 0.9);
@@ -26,27 +26,29 @@ body {
     margin-bottom: 10px;
 }
 
+.header img.profile-img {
+    display: block;
+    margin: 10px auto;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 10px #00ffff;
+    transition: transform 0.3s ease-in-out;
+}
+
+.header img.profile-img:hover {
+    transform: scale(1.1);
+}
+
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 nav ul li {
-    display: inline-block;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-nav ul li a:hover {
-    color: #00ffff;
-    text-shadow: 0 0 5px #00ffff;
+    position: relative;
 }
 
 nav ul li a {
@@ -55,6 +57,7 @@ nav ul li a {
     font-weight: bold;
     transition: 0.3s;
     position: relative;
+    padding: 5px 10px;
 }
 
 nav ul li a::after {
@@ -69,15 +72,14 @@ nav ul li a::after {
     transform: translateX(-50%);
 }
 
-nav ul li a:hover::after {
-    width: 100%;
-}
-
 nav ul li a:hover {
     color: #00ffff;
     text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
 }
 
+nav ul li a:hover::after {
+    width: 100%;
+}
 
 .Container {
     text-align: center;
@@ -94,3 +96,46 @@ nav ul li a:hover {
     }
 }
 
+/* Estilo específico para o perfil */
+.Container p {
+    font-size: 20px;
+    margin: 10px 0;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+/* Botão de logout estilizado */
+a[href*="logout=true"] {
+    color: #ff4d4d !important;
+    text-shadow: 0 0 5px #ff4d4d;
+}
+
+a[href*="logout=true"]:hover {
+    color: #ff1a1a !important;
+    text-shadow: 0 0 10px #ff1a1a;
+}
+
+a[href*="logout=true"]::after {
+    background: #ff4d4d !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .header img.profile-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .Container p {
+        font-size: 16px;
+    }
+}
