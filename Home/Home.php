@@ -1,21 +1,21 @@
 <?php
+
+
 // inicia a sessão
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Verifica se o usuário está logado, se não estiver, redireciona para a página de login
 if (!isset($_SESSION['User'])) {
-    $_SESSION ['alert'] = "Você não está logado!";
-    header("Location: ../index.php");
-    exit();
+    header("Location: ../ErroSessao.php");
+    exit;
 }
 
 include_once '../Server/Porteiro.php';
 include_once "../Utilitarios/Alerta.php";
 
-
 $User = BuscarUsuario($_SESSION['User']);
+
 $User_img = DefinirImagem($User['Img'] , $User["ID"]); // Define a imagem padrão caso não exista
 
 
@@ -49,7 +49,42 @@ echo "</pre>";
         </nav>
     </div>
     <div class ="Container">
-        <p>Email: <?php echo htmlspecialchars($User['Email'] ?? 'sem@email.com'); ?></p>
-    </div>    
+    <div class="Persona">
+        <?php
+        $persona = Perfil_persona($User["ID"]);
+        if ($persona) {
+            // Card flip: Frente com nome, nível e imagem, verso com as demais informações
+            echo '<div class="card">';
+            echo '  <div class="card-inner">';
+            // Frente do card
+            echo '    <div class="card-front">';
+            echo '      <h3>' . htmlspecialchars($persona['Nome']) . '</h3>';
+            echo '      <p>Level: ' . htmlspecialchars($persona['Level']) . '</p>';
+            echo '      <img src="' . htmlspecialchars($User_img) . '" alt="Imagem de perfil" class="profile-img">';
+            echo '    </div>';
+            // Verso do card
+            echo '    <div class="card-back">';
+            echo '      <p><strong>Raça:</strong> ' . htmlspecialchars($persona['Raca']) . '</p>';
+            echo '      <p><strong>Classe:</strong> ' . htmlspecialchars($persona['Classe']) . '</p>';
+            echo '      <p><strong>XP:</strong> ' . htmlspecialchars($persona['XP']) . '</p>';
+            echo '      <p><strong>Vida:</strong> ' . htmlspecialchars($persona['Vida']) . '</p>';
+            echo '      <p><strong>Dinheiro:</strong> ' . htmlspecialchars($persona['Dinheiro']) . '</p>';
+            echo '      <p><strong>Status:</strong> ' . htmlspecialchars(implode(", ", $persona['Status'])) . '</p>';
+            echo '      <p><strong>Criado em:</strong> ' . htmlspecialchars($persona['CriadoEm']) . '</p>';
+            echo '      <br>';
+            $link = 'Game/main.php?capitulo=' . urlencode($User['Cap']) . 
+                    '&episodio=' . urlencode($User['Ep']) . 
+                    '&text=' . urlencode($User['Text']);
+            
+            echo        "<a href='$link'>Coninuar!</a>";
+    
+            echo '    </div>';
+            echo '  </div>';
+            echo '</div>';
+        } else {
+            echo '<a href="Personagem/Novo.php">Criar Novo Personagem</a>';
+        }
+        ?>
+    </div>  
 </body>
 </html>

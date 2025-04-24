@@ -1,0 +1,20 @@
+[
+    {
+        "Nome": "Thiago",
+        "Raca": "Demi-Humano",
+        "Classe": "Assassino",
+        "Level": 1,
+        "XP": 0,
+        "Vida": 100,
+        "Mana": 100,
+        "Forca": 10,
+        "Dinheiro": 0,
+        "Inventario": [],
+        "Habilidades": [],
+        "Equipamentos": [],
+        "Status": [],
+        "Ep_": 1,
+        "Cap_": 1,
+        "CriadoEm": "2025-04-23 17:03:16"
+    }
+]

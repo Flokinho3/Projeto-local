@@ -1,57 +1,50 @@
-@font-face {
-    font-family: 'Orbitron';
-    src: url('../Fonte/static/Orbitron-Regular.ttf') format('truetype'),
-         url('../Fonte/static/Orbitron-Bold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 /* Entrada.css */
 
-body {
+* {
     margin: 0;
     padding: 0;
-    font-family: 'Orbitron', sans-serif;
-    background: radial-gradient(ellipse at bottom, #0d0d1a 0%, #000000 100%);
-    color: #FFFFFF;
+    box-sizing: border-box;
+}
+
+body {
+    background: url('../images/ruined-castle-dark.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Cinzel', serif;
+    color: #e0dcdc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
-    overflow: hidden;
+    backdrop-filter: blur(3px);
+    position: relative;
 }
 
 .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    gap: 50px;
+    gap: 40px;
+    background-color: rgba(20, 20, 20, 0.85);
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid #5b3b1e;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+    z-index: 10;
 }
 
 .login, .register {
-    background: rgba(20, 20, 40, 0.9);
-    border: 1px solid #3f3f70;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
     width: 300px;
-    backdrop-filter: blur(5px);
-    transition: 0.3s;
-}
-
-.login:hover, .register:hover {
-    box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
 }
 
 h1 {
-    text-align: center;
-    color: #00ffff;
+    font-size: 1.8rem;
+    color: #c4a484;
     margin-bottom: 20px;
-    text-shadow: 0 0 10px #00ffff;
+    text-shadow: 2px 2px 5px black;
+    animation: flicker 3s infinite;
 }
 
 label {
-    display: block;
-    margin-bottom: 5px;
-    color: #ccc;
+    font-weight: bold;
+    color: #a67b5b;
 }
 
 input[type="text"],
@@ -59,26 +52,59 @@ input[type="password"],
 input[type="email"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #444;
-    border-radius: 8px;
-    background-color: #1a1a2e;
-    color: #fff;
-    margin-bottom: 15px;
-}
-
-input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background: linear-gradient(to right, #00c3ff, #0076ff);
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
+    margin-top: 5px;
+    background-color: #2c2c2c;
+    border: 1px solid #5b3b1e;
+    color: #e0dcdc;
+    border-radius: 5px;
+    outline: none;
     transition: 0.3s;
 }
 
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+    border-color: #c4a484;
+    background-color: #353535;
+}
+
+input[type="submit"] {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    background-color: #5b3b1e;
+    color: #f0e6d2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
 input[type="submit"]:hover {
-    background: linear-gradient(to right, #00ffff, #0055ff);
-    box-shadow: 0 0 10px #00ffff;
+    background-color: #7d5432;
+}
+
+/* Animação de flicker leve nos títulos */
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        opacity: 0.7;
+    }
+}
+
+/* Névoa opcional */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/fog-overlay.gif') center center / cover no-repeat;
+    opacity: 0.1;
+    z-index: 1;
+    pointer-events: none;
 }

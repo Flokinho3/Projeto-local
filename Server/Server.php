@@ -4,6 +4,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start(); // inicia a sessão se ainda  estiver iniciada
 }
+
 /*
 
 baco de dados:  Servidor: 127.0.0.1:3306
@@ -12,12 +13,14 @@ Tabela: Users
 
 
 # 	Nome 	Tipo 	     	 	 	 	 	 	
-1 	ID      Primária 	int(11) 			 	 AUTO_INCREMENT 	  	  	
+1 	ID      Primária 	int(11) 			 	 PAdrao 	  	  	
 2 	Nome 	text 	    utf8mb4_unicode_ci 		 	 			  	  	
 3 	Senha 	text 	    utf8mb4_unicode_ci 		 	 			  	  	
 4 	Email 	text 	    utf8mb4_unicode_ci 		 	 			  	  	
-5 	Img 	text 	    utf8mb4_unicode_ci 		 'Base.png' 			  	  	
-
+5 	Img 	text 	    utf8mb4_unicode_ci 		 'Base.png' 
+6	Ep	    int(11)				                  1
+7	Cap	    int(11)				                  1
+8	Text	int(11)			                      1			
 
 */
 
@@ -36,7 +39,6 @@ function conectar() {
         die("Erro ao conectar ao banco de dados remoto: " . $e->getMessage());
     }
 }
-
 //Cadastro
 function Cadastro($nome, $senha, $email) {
     $senha = password_hash($senha, PASSWORD_DEFAULT); // Criptografa a senha
@@ -78,7 +80,6 @@ function Cadastro($nome, $senha, $email) {
     header("Location: ../index.php"); // Redireciona para a página de login
     exit(); // Encerra o script
 }
-
 //Login
 function login($nome, $senha) {
     // Conecta ao banco de dados
@@ -112,7 +113,6 @@ function login($nome, $senha) {
         exit(); // Encerra o script
     }
 }
-
 //Buscar Usuário
 function BuscarUsuario($nome) {
     // Conecta ao banco de dados
@@ -132,7 +132,7 @@ function BuscarUsuario($nome) {
     unset($resultado['Senha']);
     return $resultado; // Retorna os dados do usuário
 }
-
+// Substituir Imagem
 function SubistituirImagem($FILE) {
     if (is_dir($FILE)) {
         $files = glob($FILE . "/*");
@@ -142,7 +142,7 @@ function SubistituirImagem($FILE) {
         }
     }
 }
-
+// Adicionar Imagem
 function AdicionarImagem($userId, $imageName) {
     $conn = conectar();
     if (!$conn) {
@@ -187,7 +187,7 @@ function AdicionarImagem($userId, $imageName) {
     header("Location: ../Home/Perfil.php");
     exit();
 }
-
+// Definir Imagem
 function DefinirImagem($userIMG, $userId) {
     if (empty($userIMG) || $userIMG === 'Base.png') {
         return '../images/Base.png';
@@ -195,7 +195,6 @@ function DefinirImagem($userIMG, $userId) {
         return '../images/' . $userId . '/' . $userIMG;
     }
 }
-
 // Deletar Imagem
 function DeletarImagem($userId, $imagemSelecionada) {
     $conn = conectar();
@@ -216,6 +215,102 @@ function DeletarImagem($userId, $imagemSelecionada) {
 
     $conn = null;
     header("Location: ../Home/Perfil.php");
+    exit();
+}
+// Carrega as informações do personagem do usuario
+function Perfil_persona ($userId) {
+    $FILE_PERSONA = "../Home/Users/" . $userId . "/Persona.json";
+    if (file_exists($FILE_PERSONA)) {
+        $json = file_get_contents($FILE_PERSONA);
+        $persona = json_decode($json, true);
+        return $persona[0]; // Retorna o primeiro personagem
+    } else {
+        return null; // Retorna null se o arquivo não existir
+    }
+}
+
+// Carregar Persona
+function carregarPersona($userId) {
+    $FILE_PERSONA = "../Home/Users/" . $userId . "/Persona.json";
+    if (file_exists($FILE_PERSONA)) {
+        $json = file_get_contents($FILE_PERSONA);
+        $persona = json_decode($json, true);
+        return $persona;
+    } else {
+        return []; // Retorna um array vazio se o arquivo não existir
+    }
+}
+
+// Salvar Persona
+function salvarPersona($userId, $persona) {
+    $FILE_PERSONA = "../Home/Users/" . $userId . "/Persona.json";
+    $json = json_encode($persona, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    if (file_put_contents($FILE_PERSONA, $json) !== false) {
+        return true; // Retorna true se o arquivo foi salvo com sucesso
+    } else {
+        return false; // Retorna false se houve um erro ao salvar o arquivo
+    }
+}
+
+// Atualizar Persona
+function AtualizarPersona($userId, $persona) {
+    $FILE_PERSONA = "../Home/Users/" . $userId . "/Persona.json";
+    if (file_exists($FILE_PERSONA)) {
+        $json = json_encode($persona, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        if (file_put_contents($FILE_PERSONA, $json) !== false) {
+            return true; // Retorna true se o arquivo foi salvo com sucesso
+        } else {
+            return false; // Retorna false se houve um erro ao salvar o arquivo
+        }
+    } else {
+        return false; // Retorna false se o arquivo não existir
+    }
+}
+
+// Criar Persona
+function CriarPersona($userId, $nome, $raca, $classe) {
+    // Verifica e cria o diretório, se necessário
+    $dirPath = "../Home/Users/" . $userId;
+    if (!is_dir($dirPath)) {
+        mkdir($dirPath, 0777, true);  // Cria o diretório se ele não existir
+    }
+
+    // Carrega o personagem existente
+    $persona = carregarPersona($userId);
+
+    // Adiciona o novo personagem
+    $persona[] = [
+        'Nome' => $nome,
+        'Raca' => $raca,
+        'Classe' => $classe,
+        'Level' => 1,
+        'XP' => 0,
+        'Vida' => 100,
+        'Mana' => 100,
+        'Forca' => 10,
+        'Dinheiro' => 0,
+        'Inventario' => [],
+        'Habilidades' => [],
+        'Equipamentos' => [],
+        'Status' => [],
+        'Ep_' => 1,
+        'Cap_' => 1,
+        'CriadoEm' => date('Y-m-d H:i:s'),
+    ];
+
+    // Salva o personagem no arquivo JSON
+    if (!salvarPersona($userId, $persona)) {
+        $_SESSION['alert'] = "Erro ao salvar o personagem!";
+        header("Location: ../Home/Home.php");
+        exit();
+    }
+
+    // Mensagem de sucesso
+    $_SESSION['alert'] = "Personagem criado com sucesso!";
+    $_SESSION['Personagem'] = true;
+
+    // Redireciona para a página inicial do usuário
+    header("Location: ../Home/Home.php");
     exit();
 }
 

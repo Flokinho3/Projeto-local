@@ -7,9 +7,10 @@ session_start();
 include_once 'Utilitarios/Alerta.php'; // Include the database connection file
 
 if (isset($_SESSION['User'])) {
-    header("Location: Home/Home.php"); // Redirect to the home page if already logged in
+    header("Location: Home/Home.php");
     exit();
 }
+
 
 ?>
 

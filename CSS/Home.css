@@ -1,141 +1,271 @@
-/* Estilo geral */
-body {
-    background-image: url('https://img.freepik.com/free-photo/glowing-sky-sphere-orbits-starry-galaxy-generated-by-ai_188544-15599.jpg?t=st=1744985761~exp=1744989361~hmac=a04f8a5fc8b756e9884f22e0e2752933315fc9d2d1cc5a40088d21ac7f935d33&w=996');
-    background-attachment: fixed;
-    background-size: cover; /* Ajusta a imagem ao tamanho da tela */
-    background-position: center center;
+/* Home.css */
+
+/* Resetando as margens e paddings, e configurando a caixa */
+* {
     margin: 0;
     padding: 0;
-    font-family: 'Orbitron', sans-serif;
-    color: #FFFFFF;
-    height: 100vh;
-    overflow: hidden;
+    box-sizing: border-box;
 }
 
+/* Corpo da página com fundo de gradiente e fonte medieval */
+body {
+    background: linear-gradient(135deg, #1b1b1b 0%, #2c2c2c 100%);
+    color: #e0dcdc;
+    font-family: 'Cinzel', serif; /* Fonte com vibe medieval */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Estilo para o cabeçalho */
 .header {
-    background-color: rgba(10, 10, 30, 0.9);
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
     padding: 20px;
     text-align: center;
-    border-bottom: 1px solid #00ffff;
-    box-shadow: 0 0 10px #00ffff30;
+    border-bottom: 2px solid #5b3b1e;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
 .header h1 {
-    color: #00ffff;
-    text-shadow: 0 0 5px #00ffff;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    color: #a67b5b;
+    text-shadow: 2px 2px 5px #000;
+    animation: flicker 3s infinite; /* Animação de "flicker" no título */
 }
 
-.header img.profile-img {
-    display: block;
-    margin: 10px auto;
-    border: 2px solid #00ffff;
-    box-shadow: 0 0 10px #00ffff;
-    transition: transform 0.3s ease-in-out;
-}
-
-.header img.profile-img:hover {
-    transform: scale(1.1);
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-nav ul li {
-    position: relative;
-}
-
-nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-    position: relative;
-    padding: 5px 10px;
-}
-
-nav ul li a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background: #00ffff;
-    bottom: 0;
-    left: 50%;
-    transition: 0.3s;
-    transform: translateX(-50%);
-}
-
-nav ul li a:hover {
-    color: #00ffff;
-    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
-}
-
-nav ul li a:hover::after {
-    width: 100%;
-}
-
-.Container {
-    text-align: center;
-    color: #fff;
-    padding: 40px;
-    font-size: 18px;
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-}
-
-@keyframes fadeIn {
-    to {
+/* Efeito de "flicker" no título */
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
         opacity: 1;
+    }
+    20%, 24%, 55% {
+        opacity: 0;
     }
 }
 
-/* Estilo específico para o perfil */
-.Container p {
-    font-size: 20px;
-    margin: 10px 0;
-    letter-spacing: 1px;
-    text-shadow: 0 0 5px #00ffff;
+/* Imagem de perfil */
+.profile-img {
+    border: 2px solid #5b3b1e;
+    border-radius: 50%;
+    margin-top: 10px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
 }
 
-/* Botão de logout estilizado */
-a[href*="logout=true"] {
-    color: #ff4d4d !important;
-    text-shadow: 0 0 5px #ff4d4d;
+/* Navegação do menu */
+nav ul {
+    list-style: none;
+    margin-top: 20px;
 }
 
-a[href*="logout=true"]:hover {
-    color: #ff1a1a !important;
-    text-shadow: 0 0 10px #ff1a1a;
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
 }
 
-a[href*="logout=true"]::after {
-    background: #ff4d4d !important;
+nav ul li a {
+    text-decoration: none;
+    color: #e0dcdc;
+    font-weight: bold;
+    transition: color 0.3s;
+    font-size: 1.1rem;
 }
 
-/* Responsividade */
+nav ul li a:hover {
+    color: #c4a484;
+}
+
+/* Container principal com sombra e fundo translúcido */
+.Container {
+    background: rgba(20, 20, 20, 0.85);
+    border: 1px solid #5b3b1e;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 0 20px #2f2f2f;
+    backdrop-filter: blur(4px);
+}
+
+/* Estilo dos detalhes do personagem */
+.Persona {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.Persona p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: #e0dcdc;
+}
+
+/* Links dentro da área do personagem */
+.Persona a {
+    color: #c4a484;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.Persona a:hover {
+    text-decoration: underline;
+    color: #a67b5b;
+}
+
+/* Estilo para o <pre> - exibição de código */
+pre {
+    background-color: rgba(45, 45, 45, 0.7);
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-top: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #d4d4d4;
+    max-height: 400px;
+}
+
+/* Efeito de transição suave nos links */
+a {
+    transition: color 0.3s ease;
+}
+
+/* Estilos para os botões */
+button {
+    background-color: #5b3b1e;
+    color: #e0dcdc;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #7a523e;
+}
+
+/* Estilo para o card */
+.card {
+    width: 300px;
+    height: 400px;
+    perspective: 1000px; /* Define a perspectiva para o efeito de 3D */
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+/* Container do card (flip) */
+.card-inner {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s; /* A transição de rotação do card */
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg); /* Gira o card ao passar o mouse */
+}
+
+/* Frente do card */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Impede a visibilidade do verso quando está virado */
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Frente do card */
+.card-front {
+    background: rgba(20, 20, 20, 0.85);
+    border: 1px solid #5b3b1e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px #2f2f2f;
+}
+
+/* Verso do card */
+.card-back {
+    background: rgba(45, 45, 45, 0.9);
+    color: #e0dcdc;
+    border: 1px solid #5b3b1e;
+    transform: rotateY(180deg); /* A parte de trás do card começa virada */
+    box-shadow: 0 0 10px #2f2f2f;
+}
+
+/* Estilos para a imagem do perfil */
+.profile-img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid #5b3b1e;
+    margin-top: 15px;
+}
+
+/* Estilo para o título e o nível na frente do card */
+.card-front h3 {
+    font-size: 1.5rem;
+    color: #a67b5b;
+    text-shadow: 2px 2px 5px #000;
+}
+
+.card-front p {
+    font-size: 1.2rem;
+    color: #e0dcdc;
+}
+
+/* Estilo do texto no verso do card */
+.card-back p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+/* Efeito de hover para os links */
+.card-back a {
+    color: #c4a484;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card-back a:hover {
+    text-decoration: underline;
+    color: #a67b5b;
+}
+
+/* Responsividade - Ajustes para telas menores */
 @media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
     nav ul {
         flex-direction: column;
         gap: 10px;
     }
 
-    .header h1 {
-        font-size: 24px;
+    .profile-img {
+        width: 50px;
+        height: 50px;
     }
 
-    .header img.profile-img {
-        width: 40px;
-        height: 40px;
+    .Container {
+        padding: 15px;
     }
 
-    .Container p {
-        font-size: 16px;
+    .Persona {
+        font-size: 1rem;
+    }
+
+    .Persona a {
+        font-size: 1rem;
     }
 }
