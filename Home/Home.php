@@ -32,7 +32,7 @@ echo "</pre>";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - <?php echo htmlspecialchars($User['Nome'] ?? 'Usuário'); ?></title>
     <link rel="stylesheet" href="../CSS/Home.css?=<?php echo time(); ?>">
-    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../imagens/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <div class = "header">

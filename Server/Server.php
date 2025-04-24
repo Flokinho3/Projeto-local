@@ -151,7 +151,7 @@ function AdicionarImagem($userId, $imageName) {
         exit();
     }
 
-    $FILE = "../images/" . $userId;
+    $FILE = "../imagens/" . $userId;
 
     if (!is_dir($FILE)) {
         mkdir($FILE, 0777, true);
@@ -190,9 +190,9 @@ function AdicionarImagem($userId, $imageName) {
 // Definir Imagem
 function DefinirImagem($userIMG, $userId) {
     if (empty($userIMG) || $userIMG === 'Base.png') {
-        return '../images/Base.png';
+        return '../imagens/Base.png';
     } else {
-        return '../images/' . $userId . '/' . $userIMG;
+        return '../imagens/' . $userId . '/' . $userIMG;
     }
 }
 // Deletar Imagem
@@ -204,7 +204,7 @@ function DeletarImagem($userId, $imagemSelecionada) {
         exit();
     }
 
-    $FILE = "../images/" . $userId . "/" . $imagemSelecionada;
+    $FILE = "../imagens/" . $userId . "/" . $imagemSelecionada;
 
     if (file_exists($FILE)) {
         unlink($FILE);

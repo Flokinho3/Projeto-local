@@ -7,7 +7,7 @@
 }
 
 body {
-    background: url('../images/ruined-castle-dark.png') no-repeat center center fixed;
+    background: url('../imagens/ruined-castle-dark.png') no-repeat center center fixed;
     background-size: cover;
     font-family: 'Cinzel', serif;
     color: #e0dcdc;
@@ -103,7 +103,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('../images/fog-overlay.gif') center center / cover no-repeat;
+    background: url('../imagens/fog-overlay.gif') center center / cover no-repeat;
     opacity: 0.1;
     z-index: 1;
     pointer-events: none;

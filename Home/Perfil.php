@@ -32,7 +32,7 @@ echo "</pre>";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - <?php echo htmlspecialchars($User['User'] ?? 'Usuário'); ?></title>
     <link rel="stylesheet" href="../CSS/Perfil.css?=<?php echo time(); ?>">
-    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../imagens/favicon.ico" type="image/x-icon">
 </head>
 <body>
     
@@ -58,7 +58,7 @@ echo "</pre>";
                     if (file_exists($User_img)) {
                         echo "<img src='$User_img' alt='Imagem de Perfil' class='profile-image'>";
                     } else {
-                        echo "<img src='../images/Base.png' alt='Imagem de Perfil Padrão' class='profile-image'>";
+                        echo "<img src='../imagens/Base.png' alt='Imagem de Perfil Padrão' class='profile-image'>";
                     }
                     ?>
                 </div>
@@ -71,7 +71,7 @@ echo "</pre>";
             <div class="carousel-wrapper">
                 <div class="carousel">
                     <?php
-                    $pastaUsuario = "../images/" . $User["ID"];
+                    $pastaUsuario = "../imagens/" . $User["ID"];
                     $imagens = glob($pastaUsuario . "/*");
                     if (count($imagens) > 0) {
                         foreach ($imagens as $imagem) {
