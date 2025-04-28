@@ -1,55 +1,136 @@
-
-<?php
-
-session_start();
-// Check if the user is already logged in
-
-include_once 'Utilitarios/Alerta.php'; // Include the database connection file
-
-if (isset($_SESSION['User'])) {
-    header("Location: Home/Home.php");
-    exit();
-}
-
-
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="CSS/Entrada.css?=<?php echo time(); ?>">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-
+    <title>Login e Cadastro</title>
+    <link rel="stylesheet" href="CSS/Alerta.css"> 
+    <link rel="stylesheet" href="CSS/index.css?=<?php echo time(); ?>"> 
 </head>
 <body>
-    <div class="container">
-        <div class="login">
-            <h1>Login</h1>
-            <form action="Server/Porteiro.php" method="POST">
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username"><br><br>
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password"><br><br>
-                <input type="hidden" name="login" value="login">
-                <input type="submit" value="Login">
-            </form>
-        </div>
-        <div class="register">
-            <h1>Register</h1>
-            <form action="Server/Porteiro.php" method="POST">
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username"><br><br>
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password"><br><br>
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email"><br><br>
-                <input type="hidden" name="register" value="register">
-                <input type="submit" value="Register">
-            </form>
-        </div>
+    <h2>Login e Cadastro</h2>
+    <div id="tabs">
+        <button id="tab-login" onclick="showForm('login')">Login</button>
+        <button id="tab-cadastro" onclick="showForm('cadastro')">Cadastro</button>
     </div>
+
+    <!-- Formulário de Login -->
+    <div id="login-form" class="form-container active"> <!-- Define login como padrão -->
+        <h3>Login</h3>
+        <form id="formLogin">
+            <input type="email" id="emailLogin" placeholder="Email" required><br>
+            <input type="password" id="senhaLogin" placeholder="Senha" required><br>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+    <!-- Formulário de Cadastro -->
+    <div id="cadastro-form" class="form-container">
+        <h3>Cadastro</h3>
+        <form id="formCadastro">
+            <input type="text" id="nome" placeholder="Nome" required><br>
+            <input type="email" id="email" placeholder="Email" required><br>
+            <input type="password" id="senha" placeholder="Senha" required><br>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+
+    <div id="alert-container"></div>
+    <script src="JS/Alerta.js"></script>
+    <script>
+        // Função para alternar entre os formulários
+        function showForm(formType) {
+            if (formType === 'login') {
+                document.getElementById('login-form').classList.add('active');
+                document.getElementById('cadastro-form').classList.remove('active');
+                document.getElementById('tab-login').style.backgroundColor = '#4CAF50'; // Cor ativa
+                document.getElementById('tab-cadastro').style.backgroundColor = '';
+            } else {
+                document.getElementById('cadastro-form').classList.add('active');
+                document.getElementById('login-form').classList.remove('active');
+                document.getElementById('tab-cadastro').style.backgroundColor = '#4CAF50'; // Cor ativa
+                document.getElementById('tab-login').style.backgroundColor = '';
+            }
+        }
+
+        // Enviar formulário de login
+        document.getElementById('formLogin').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('emailLogin').value;
+            const senha = document.getElementById('senhaLogin').value;
+
+            fetch('Server/Porteiro.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: 'login',
+                    email: email,
+                    senha: senha
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'ok') {
+                    showAlert(data.mensagem || 'Login realizado com sucesso!', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'Home/Home.php';
+                    }, 500);
+                } else {
+                    if (Array.isArray(data.mensagens)) {
+                        data.mensagens.forEach(msg => showAlert(msg, 'error'));
+                    } else {
+                        showAlert(data.mensagem || 'Erro ao realizar login.', 'error');
+                    }
+                }
+            })
+            .catch(error => {
+                showAlert('Erro de conexão com o servidor!', 'error');
+            });
+        });
+
+        // Enviar formulário de cadastro
+        document.getElementById('formCadastro').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            fetch('Server/Porteiro.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: 'cadastro',
+                    nome: nome,
+                    email: email,
+                    senha: senha
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'ok') {
+                    showAlert(data.mensagem || 'Cadastro realizado com sucesso!', 'success');
+                } else {
+                    if (Array.isArray(data.mensagens)) {
+                        data.mensagens.forEach(msg => showAlert(msg, 'error'));
+                    } else {
+                        showAlert(data.mensagem || 'Erro ao cadastrar.', 'error');
+                    }
+                }
+            })
+
+            .catch(error => {
+                showAlert('Erro de conexão com o servidor!', 'error');
+            });
+        });
+
+        // Define o botão de login como ativo inicialmente
+        document.getElementById('tab-login').style.backgroundColor = '#4CAF50'; // Cor ativa
+        document.getElementById('tab-cadastro').style.backgroundColor = '';
+    </script>
 </body>
 </html>

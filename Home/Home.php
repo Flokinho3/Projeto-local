@@ -1,27 +1,33 @@
 <?php
 
-
-// inicia a sessão
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-if (!isset($_SESSION['User'])) {
-    header("Location: ../ErroSessao.php");
+// verifica se o usuario está logado
+session_start();
+if (!isset($_SESSION['Logado']) || $_SESSION['Logado'] !== true) {
+    header('Location: ../index.php');
     exit;
 }
 
-include_once '../Server/Porteiro.php';
-include_once "../Utilitarios/Alerta.php";
-
-$User = BuscarUsuario($_SESSION['User']);
-
-$User_img = DefinirImagem($User['Img'] , $User["ID"]); // Define a imagem padrão caso não exista
+$hour = date('H');
+$greeting = $hour < 12 ? "Bom dia" : ($hour < 18 ? "Boa tarde" : "Boa noite");
 
 
-echo "<pre>";
-print_r($User);
-echo "</pre>";
+$img = $_SESSION['Img'];
+if (empty($img)) {
+    $img = '../Imagens/Padrao.png'; // Caminho da imagem padrão
+} else {
+    $img = '../Imagens_user/' . $_SESSION['ID'] . '/' . $img; // Caminho da imagem do usuário
+}
+
+// randomiza o gradiente ao fundo da pagina
+$gradientes = [
+    'linear-gradient(to right, #ff7e5f, #feb47b)',
+    'linear-gradient(to right, #6a11cb, #2575fc)',
+    'linear-gradient(to right, #00c6ff, #0072ff)',
+    'linear-gradient(to right, #ff758c, #ff7eb3)',
+    'linear-gradient(to right, #00d2ff, #3a6073)'
+];
+$gradienteAleatorio = $gradientes[array_rand($gradientes)];
+echo "<style>body { background: $gradienteAleatorio; }</style>";
 
 ?>
 
@@ -30,61 +36,42 @@ echo "</pre>";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - <?php echo htmlspecialchars($User['Nome'] ?? 'Usuário'); ?></title>
-    <link rel="stylesheet" href="../CSS/Home.css?=<?php echo time(); ?>">
-    <link rel="icon" href="../imagens/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/Alerta.css">
+    <link rel="stylesheet" href="../CSS/Home.css">
+    <link rel="stylesheet" href="../CSS/Sidebar.css">
+    <title><?php echo htmlspecialchars($_SESSION["Nome"], ENT_QUOTES, 'UTF-8'); ?></title>
 </head>
 <body>
-    <div class = "header">
-        <h1>Bem-vindo, <?php echo htmlspecialchars($User['Nome'] ?? 'Usuário'); ?>!</h1>
-        <img src="<?php echo htmlspecialchars($User_img); ?>" alt="Imagem de perfil" class="profile-img" style="width: 50px; height: 50px; border-radius: 50%;">
-        <nav>
-            <ul>
-                <li><a href="../index.php">Início</a></li>
-                <li><a href="Home.php">Home</a></li>
-                <li><a href="Perfil.php">Perfil</a></li>
-                <li><a href="Update.php">Atualizaçoes</a></li>
-                <li><a href="../Server/Porteiro.php?logout=true">Sair</a></li>
-            </ul>
-        </nav>
+    <div class="Sidebar">
+        <h2>Menu</h2>
+        <div class="Sidebar-img">
+            <img src="<?php echo $img; ?>" alt="Foto do usuário">
+        </div>
+        <ul>
+            <li><a href="Home.php">Home</a></li>
+            <li><a href="Perfil/Perfil.php">Perfil</a></li>
+            <li><a href="#">Configurações</a></li>
+            <li><a href="../Server/Logout.php">Sair</a></li>
+        </ul>
     </div>
-    <div class ="Container">
-    <div class="Persona">
-        <?php
-        $persona = Perfil_persona($User["ID"]);
-        if ($persona) {
-            // Card flip: Frente com nome, nível e imagem, verso com as demais informações
-            echo '<div class="card">';
-            echo '  <div class="card-inner">';
-            // Frente do card
-            echo '    <div class="card-front">';
-            echo '      <h3>' . htmlspecialchars($persona['Nome']) . '</h3>';
-            echo '      <p>Level: ' . htmlspecialchars($persona['Level']) . '</p>';
-            echo '      <img src="' . htmlspecialchars($User_img) . '" alt="Imagem de perfil" class="profile-img">';
-            echo '    </div>';
-            // Verso do card
-            echo '    <div class="card-back">';
-            echo '      <p><strong>Raça:</strong> ' . htmlspecialchars($persona['Raca']) . '</p>';
-            echo '      <p><strong>Classe:</strong> ' . htmlspecialchars($persona['Classe']) . '</p>';
-            echo '      <p><strong>XP:</strong> ' . htmlspecialchars($persona['XP']) . '</p>';
-            echo '      <p><strong>Vida:</strong> ' . htmlspecialchars($persona['Vida']) . '</p>';
-            echo '      <p><strong>Dinheiro:</strong> ' . htmlspecialchars($persona['Dinheiro']) . '</p>';
-            echo '      <p><strong>Status:</strong> ' . htmlspecialchars(implode(", ", $persona['Status'])) . '</p>';
-            echo '      <p><strong>Criado em:</strong> ' . htmlspecialchars($persona['CriadoEm']) . '</p>';
-            echo '      <br>';
-            $link = 'Game/main.php?capitulo=' . urlencode($User['Cap']) . 
-                    '&episodio=' . urlencode($User['Ep']) . 
-                    '&text=' . urlencode($User['Text']);
-            
-            echo        "<a href='$link'>Coninuar!</a>";
+    <div class="container">
+        <h1><?php echo $greeting . ", " . $_SESSION['Nome']; ?></h1>
+        <div class="Favoritos_Comunidades">
+            <div class="Favoritos">
+                <h2>Favoritos</h2>
+                <ul id="favoritos-lista">
+                    <!-- Lista de favoritos será preenchida aqui via JavaScript -->
+                </ul>
+            </div>
+            <div class="Comunidades">
+                <h2>Comunidades</h2>
+                <ul id="comunidades-lista">
+                    <!-- Lista de comunidades será preenchida aqui via JavaScript -->
+                </ul>
+            </div>
+    </div>
     
-            echo '    </div>';
-            echo '  </div>';
-            echo '</div>';
-        } else {
-            echo '<a href="Personagem/Novo.php">Criar Novo Personagem</a>';
-        }
-        ?>
-    </div>  
+    <script src="../JS/Alerta.js"></script>
+    <script src="../JS/Sidebar.js"></script>    
 </body>
 </html>

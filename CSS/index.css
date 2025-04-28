@@ -1,0 +1,122 @@
+/* Reset de estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: url("https://img.freepik.com/fotos-gratis/arte-digital-belas-montanhas_23-2151123780.jpg?t=st=1745601524~exp=1745605124~hmac=a427deb117815b7b8b68c866801c367782d667af2afc1b308da03ca1285ed556&w=996");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+    color: #fff; /* Altere a cor do texto para branco para melhorar a visibilidade */
+}
+
+/* Cabeçalho */
+h2 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+/* Container de abas */
+#tabs {
+    margin-bottom: 20px;
+}
+
+#tabs button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #f1f1f154;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#tabs button:hover {
+    background-color: #ddd;
+}
+
+#tabs button:focus {
+    outline: none;
+}
+
+#tabs button:active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Formulário */
+.form-container {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.356);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+    opacity: 0.9; /* Leve transparência para criar um efeito elegante */
+}
+
+.form-container.active {
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo de alertas */
+#alert-container {
+    margin-top: 20px;
+}
+
+.alert {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.alert.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.alert.error {
+    background-color: #f44336;
+    color: white;
+}

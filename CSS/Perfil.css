@@ -1,195 +1,200 @@
-/* Perfil.css */
-
-@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
-
-* {
+/* Definindo a aparência geral da página */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    color: #fff;
+    background: linear-gradient(135deg, #3a3a3a, #222);
+    transition: background 0.5s ease;
+}
+
+/* Sidebar */
+.Sidebar {
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    padding: 20px;
     box-sizing: border-box;
+    color: #fff;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
 }
 
-body {
-    background: url('../imagens/dark-library.png') no-repeat center center fixed;
-    background-size: cover;
-    font-family: 'Cinzel', serif;
-    color: #e0dcdc;
-    min-height: 100vh;
-    padding: 20px;
-    backdrop-filter: blur(2px);
-    position: relative;
-}
-
-/* Header */
-.header {
-    background-color: rgba(20, 20, 20, 0.9);
-    padding: 15px 30px;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #7d5432;
-    box-shadow: 0 0 20px black;
-}
-
-.header h1 {
-    color: #c4a484;
-    text-shadow: 2px 2px 6px #000;
-}
-
-.header nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    margin-top: 10px;
-}
-
-.header nav a {
-    color: #a67b5b;
-    text-decoration: none;
+.Sidebar h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
     font-weight: bold;
-    transition: 0.3s;
 }
 
-.header nav a:hover {
-    color: #f1c27d;
+.Sidebar-img img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 20px;
 }
 
-/* Container */
-.Container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    background-color: rgba(15, 15, 15, 0.85);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+.Sidebar ul {
+    list-style: none;
+    padding: 0;
 }
 
-/* User Info */
-.User-Info {
-    padding: 20px;
-    background-color: rgba(30, 30, 30, 0.8);
-    border: 1px solid #5b3b1e;
-    border-radius: 10px;
+.Sidebar ul li {
+    margin: 10px 0;
 }
 
-.profile-image {
+.Sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.Sidebar ul li a:hover {
+    background-color: #575757;
+    transform: translateX(10px);
+}
+
+/* Estilos do container de conteúdo */
+.container {
+    margin-left: 270px;
+    padding: 40px;
+    background-color: #222;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 32px;
+    color: #fff;
+}
+
+.perfil-img {
     width: 150px;
     height: 150px;
-    object-fit: cover;
     border-radius: 50%;
-    border: 2px solid #c4a484;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    border: 5px solid #fff;
 }
 
-/* Carousel */
-.carousel-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
+.User h2 {
+    font-size: 28px;
+    margin-top: 20px;
+    color: #fff;
 }
 
-.carousel-wrapper {
-    overflow: hidden;
-    border-radius: 10px;
-    border: 1px solid #5b3b1e;
-    background-color: rgba(20, 20, 20, 0.8);
-}
-
-.carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: 100%;
-}
-
-.carousel-item {
-    min-width: 100%;
-    text-align: center;
-    padding: 20px;
-}
-
-.carousel-item img {
-    max-width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border: 2px solid #a67b5b;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.carousel-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.btn-carousel {
-    background-color: #5b3b1e;
-    border: none;
-    padding: 8px 15px;
-    color: #f0e6d2;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.btn-carousel:hover {
-    background-color: #7d5432;
-}
-
-.btn-remove {
-    background-color: #912d2d;
-}
-
-.btn-remove:hover {
-    background-color: #b84545;
-}
-
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(20, 20, 20, 0.7);
-    border: 1px solid #a67b5b;
-    color: #f0e6d2;
-    font-size: 24px;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-#prev {
-    left: 10px;
-}
-
-#next {
-    right: 10px;
-}
-
-/* Upload de Imagem */
-.Add_img {
-    margin-top: 40px;
-    padding: 20px;
-    background-color: rgba(25, 25, 25, 0.85);
-    border: 1px solid #5b3b1e;
-    border-radius: 10px;
-}
-
-.Add_img h2 {
-    color: #c4a484;
-    margin-bottom: 10px;
-}
-
-.Add_img input[type="file"],
-.Add_img input[type="submit"] {
-    display: block;
+.User p {
+    font-size: 18px;
     margin: 10px 0;
-    padding: 10px;
-    background-color: #5b3b1e;
-    color: #f0e6d2;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    line-height: 1.6;
 }
 
-.Add_img input[type="submit"]:hover {
-    background-color: #7d5432;
+/* Estilo do formulário de troca de imagem */
+.Img_User {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.Img_User h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+    
+#troca_img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#troca_img input[type="file"] {
+    margin-right: 10px;
+}
+
+button {
+    background-color: #ff7e5f;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #feb47b;
+    transform: scale(1.05);
+}
+
+/* Estilo do carregamento */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+/* Mensagens de erro */
+.alert {
+    background-color: #f44336;
+    color: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: none;
+    animation: shake 0.3s ease-in-out;
+}
+
+/* Animação de shake para mensagens de erro */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+    .Sidebar {
+        width: 200px;
+        padding: 15px;
+    }
+    
+    .container {
+        margin-left: 220px;
+        padding: 20px;
+    }
+
+    .Sidebar h2 {
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .perfil-img {
+        width: 120px;
+        height: 120px;
+    }
 }
