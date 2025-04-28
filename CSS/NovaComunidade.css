@@ -1,0 +1,168 @@
+/* Reseta o básico pra não ficar tudo bagunçado */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo geral do corpo da página */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Sidebar estilosa */
+.Sidebar {
+    width: 250px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.Sidebar-img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+}
+
+.Sidebar-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.Sidebar ul {
+    list-style: none;
+    width: 100%;
+}
+
+.Sidebar ul li {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.Sidebar ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.Sidebar ul li a:hover {
+    color: #00d2ff;
+}
+
+/* Container principal */
+.container {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Saudação */
+.container h1 {
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+/* Estilo do formulário */
+form {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+input[type="text"],
+input[type="file"],
+input[type="color"],
+textarea,
+select,
+input[name="outro_tema"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #f2f2f2;
+    font-size: 16px;
+    color: #333;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Botão */
+button[type="submit"] {
+    padding: 12px 20px;
+    background: #00c6ff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button[type="submit"]:hover {
+    background: #0072ff;
+}
+
+/* Input de "Outro tema" que aparece dinamicamente */
+input[name="outro_tema"] {
+    display: none;
+}
+
+/* Responsividade (pra não ficar fedendo no celular) */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .Sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .Sidebar h2, .Sidebar ul {
+        display: none; /* Esconde título e menu no mobile, só deixa a foto */
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    form {
+        padding: 20px;
+    }
+}

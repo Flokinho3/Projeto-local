@@ -1,3 +1,30 @@
+function showLoading(message = 'Carregando...') {
+    const loading = document.createElement('div');
+    loading.id = 'loading-overlay';
+    loading.style.position = 'fixed';
+    loading.style.top = '0';
+    loading.style.left = '0';
+    loading.style.width = '100%';
+    loading.style.height = '100%';
+    loading.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    loading.style.display = 'flex';
+    loading.style.alignItems = 'center';
+    loading.style.justifyContent = 'center';
+    loading.style.zIndex = '9999';
+    loading.style.color = 'white';
+    loading.style.fontSize = '24px';
+    loading.innerText = message;
+
+    document.body.appendChild(loading);
+}
+
+function hideLoading() {
+    const loading = document.getElementById('loading-overlay');
+    if (loading) {
+        document.body.removeChild(loading);
+    }
+}
+
 function showAlert(message, type = 'success', duration = 3000) {
     const container = document.getElementById('alert-container');
 

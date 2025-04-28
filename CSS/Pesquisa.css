@@ -1,0 +1,126 @@
+/* Container geral */
+.container {
+    margin-left: 250px; /* Espaço pra sidebar */
+    padding: 20px;
+    min-height: 100vh;
+    color: white;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Container dos cards */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Cada card */
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    overflow: hidden;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Quando passa o mouse */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* Imagem de capa */
+.card-capa {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Conteúdo do card */
+.card-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Nome da comunidade */
+.card-content h3 {
+    margin: 0;
+    font-size: 22px;
+    color: #111010;
+}
+
+/* Descrição da comunidade */
+.card-content p {
+    margin: 0;
+    font-size: 14px;
+    color: #000000;
+}
+
+/* Info pequena (criador e data) */
+.card-content small {
+    color: #0e0707;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Tema */
+.temas {
+    margin-top: 10px;
+}
+
+.temas h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #ffcc00;
+}
+
+.tema {
+    display: inline-block;
+    background: #ffcc00;
+    color: #333;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* Link para entrar na comunidade */
+.card-content a {
+    margin-top: auto;
+    text-align: center;
+    background-color: #00c6ff;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.card-content a:hover {
+    background-color: #0072ff;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .cards-container {
+        justify-content: center;
+    }
+
+    .card {
+        width: 90%;
+    }
+}

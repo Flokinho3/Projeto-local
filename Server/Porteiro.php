@@ -1,9 +1,18 @@
 <?php
-$input = $_POST;
+if ($_SERVER['CONTENT_TYPE'] === 'application/json') {
+    $input = json_decode(file_get_contents('php://input'), true);
+} else {
+    $input = $_POST;
+}
 
+file_put_contents('log.txt', print_r($_POST, true), FILE_APPEND);
 include_once 'funcoes.php';
 header('Content-Type: application/json; charset=utf-8');
 session_start();
+
+// mostra no console o que está sendo enviado
+file_put_contents('log.txt', print_r($input, true), FILE_APPEND);
+
 // Verifica se a ação foi enviada corretamente
 if (empty($input) || !isset($input['action'])) {
     echo json_encode(['status' => 'erro', 'mensagens' => ['Ação inválida']]);
@@ -13,24 +22,25 @@ if (empty($input) || !isset($input['action'])) {
 try {
     switch ($input['action']) {
         case 'cadastro':
+            // Lógica para cadastro
             $erros = [];
-
+    
             if (empty($input['nome'])) {
                 $erros[] = 'O nome é obrigatório.';
             }
-
+    
             if (empty($input['email'])) {
                 $erros[] = 'O email é obrigatório.';
             } elseif (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
                 $erros[] = 'Formato de email inválido.';
             }
-
+    
             if (empty($input['senha'])) {
                 $erros[] = 'A senha é obrigatória.';
             } elseif (strlen($input['senha']) < 6) {
                 $erros[] = 'A senha deve ter no mínimo 6 caracteres.';
             }
-
+    
             if (!empty($erros)) {
                 echo json_encode(['status' => 'erro', 'mensagens' => $erros]);
                 exit;
@@ -79,7 +89,7 @@ try {
             $fileName = uniqid('img_', true) . '.' . pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
             
             // Define o diretório onde as imagens serão armazenadas
-            $uploadDir = '../Imagens_user/' . $_SESSION['ID'] . '/';
+            $uploadDir = '../Users/' . $_SESSION['ID'] . '/';
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);  // Cria o diretório caso não exista
             }
@@ -107,7 +117,41 @@ try {
             }
             break;
 
+        case 'novaComunidade':
+            $erros = [];
 
+            if (empty($input['nome'])) {
+                $erros[] = 'O nome da comunidade é obrigatório.';
+            }
+
+            if (empty($input['descricao'])) {
+                $erros[] = 'A descrição da comunidade é obrigatória.';
+            }
+
+            if (empty($input['Cor_tema'])) {
+                $erros[] = 'A cor do tema é obrigatória.';
+            }
+
+            if (empty($input['tema'])) {
+                $erros[] = 'O tema da comunidade é obrigatório.';
+            }
+
+            if (!isset($_FILES['imagem']) || $_FILES['imagem']['error'] !== 0) {
+                $erros[] = 'Erro ao fazer upload da imagem do ícone.';
+            }
+
+            if (!isset($_FILES['capa']) || $_FILES['capa']['error'] !== 0) {
+                $erros[] = 'Erro ao fazer upload da imagem de capa.';
+            }
+
+            if (!empty($erros)) {
+                echo json_encode(['status' => 'erro', 'mensagens' => $erros]);
+                exit;
+            }
+
+            $resposta = criarComunidade($input, $_SESSION['ID']);
+            echo json_encode($resposta);
+            break;
         default:
             echo json_encode(['status' => 'erro', 'mensagens' => ['Ação desconhecida']]);
             break;

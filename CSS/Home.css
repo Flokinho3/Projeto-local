@@ -1,20 +1,101 @@
-*{
+/* CSS Geral para a página */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: /* O gradiente será inserido dinamicamente via PHP */;
+    transition: background 0.5s ease-in-out;
 }
 
-body{
-    font-family: 'Poppins', sans-serif;
-    background-color: #12cebe;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+/* Estilos da Área Principal */
+.container {
+    margin-left: 270px;
+    width: calc(100% - 270px);
+    padding: 40px;
+    box-sizing: border-box;
+    background-color: rgba(121, 27, 209, 0.438);
+    border-radius: 15px;
+    margin-left: 0px;
+}
+
+.container h1 {
+    font-size: 32px;
     color: #fff;
     text-align: center;
-    font-size: 1.2rem;
-    font-weight: 500;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+}
+
+.Favoritos_Comunidades {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Favoritos, .Comunidades {
+    width: 48%;
+}
+
+.Favoritos h2, .Comunidades h2 {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+#favoritos-lista, #comunidades-lista {
+    list-style-type: none;
+    padding: 0;
+    color: #fff;
+}
+
+#favoritos-lista li, #comunidades-lista li {
+    font-size: 18px;
+    margin: 8px 0;
+}
+
+#favoritos-lista li:hover, #comunidades-lista li:hover {
+    color: #feb47b;
+}
+
+h2 {
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .Sidebar {
+        width: 200px;
+    }
+
+    .container {
+        margin-left: 210px;
+        width: calc(100% - 210px);
+    }
+
+    .Favoritos_Comunidades {
+        flex-direction: column;
+    }
+
+    .Favoritos, .Comunidades {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .container {
+        margin-left: 0;
+        width: 100%;
+    }
 }

@@ -56,6 +56,8 @@
         document.getElementById('formLogin').addEventListener('submit', function(e) {
             e.preventDefault();
 
+            console.log('Dados capturados:', { email: document.getElementById('emailLogin').value, senha: document.getElementById('senhaLogin').value }); // Log para depuração
+
             const email = document.getElementById('emailLogin').value;
             const senha = document.getElementById('senhaLogin').value;
 
@@ -94,9 +96,11 @@
         document.getElementById('formCadastro').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
-            const senha = document.getElementById('senha').value;
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const senha = document.getElementById('senha').value.trim();
+
+            console.log('Dados capturados:', { nome, email, senha }); // Log para depuração
 
             fetch('Server/Porteiro.php', {
                 method: 'POST',
@@ -112,18 +116,17 @@
             })
             .then(res => res.json())
             .then(data => {
-                if (data.status === 'ok') {
+                console.log('Resposta do servidor:', data); // Log para depuração
+                if (data && data.status === 'ok') {
                     showAlert(data.mensagem || 'Cadastro realizado com sucesso!', 'success');
+                } else if (data && Array.isArray(data.mensagens)) {
+                    data.mensagens.forEach(msg => showAlert(msg, 'error'));
                 } else {
-                    if (Array.isArray(data.mensagens)) {
-                        data.mensagens.forEach(msg => showAlert(msg, 'error'));
-                    } else {
-                        showAlert(data.mensagem || 'Erro ao cadastrar.', 'error');
-                    }
+                    showAlert(data.mensagem || 'Erro ao cadastrar.', 'error');
                 }
             })
-
             .catch(error => {
+                console.error('Erro de conexão:', error);
                 showAlert('Erro de conexão com o servidor!', 'error');
             });
         });

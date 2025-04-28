@@ -8,10 +8,10 @@ if (!isset($_SESSION['Logado']) || $_SESSION['Logado'] !== true) {
 }
 
 $img = $_SESSION['Img'];
-if (empty($img)) {
+if (empty($img) || $img === 'Padrao.png') {
     $img = '../../Imagens/Padrao.png'; // Caminho da imagem padrão
 } else {
-    $img = '../../Imagens_user/' . $_SESSION['ID'] . '/' . $img; // Caminho da imagem do usuário
+    $img = '../../Users/' . $_SESSION['ID'] . '/' . $img; // Caminho da imagem do usuário
 }
 // randomiza o gradiente ao fundo da pagina
 $gradientes = [

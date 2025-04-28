@@ -89,7 +89,6 @@ function loginUsuario($email, $senha) {
 
         // Verifica a senha
         if (password_verify($senha, $user['Senha'])) {
-            session_start();
             $_SESSION['ID'] = $user['ID'];
             $_SESSION['Nome'] = $user['Nome'];
             $_SESSION['Email'] = $user['Email'];
@@ -119,19 +118,84 @@ function atualizarImg($id, $img) {
     }
 }
 
-function ExluirImg ($ID) {
-    $FILE = "../Imagens_user/$ID/";
-    // Verifica se o diretório existe
-    if (is_dir($FILE)) {
-        // Remove todos os arquivos dentro do diretório
-        $files = glob($FILE . '*'); // Pega todos os arquivos do diretório
-        foreach ($files as $file) {
-            if (is_file($file)) {
-                unlink($file); // Remove o arquivo
-            }
-        }
-    } 
+function Verificar_Img($file) {
+    $extensoes = ['jpg', 'jpeg', 'png', 'gif'];
+    $extensao = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+    if (!in_array($extensao, $extensoes)) {
+        return false;
+    }
+
+    // Verifica tipo MIME real
+    $mime = mime_content_type($file['tmp_name']);
+    if (!in_array($mime, ['image/jpeg', 'image/png', 'image/gif'])) {
+        return false;
+    }
+    /*
+    // Verifica tamanho
+    if ($file['size'] > 2 * 1024 * 1024) { // 2MB
+        return false;
+    }
+    */
+    // Nomeia arquivo de forma única
+    $nomeAleatorio = uniqid('img_', true) . '.' . $extensao;
+    return $nomeAleatorio;
 }
 
+
+function criarComunidade($informacoes, $idUsuario) {
+    $conn = conectar();
+
+    $nome = mysqli_real_escape_string($conn, $informacoes['nome']);
+    $descricao = mysqli_real_escape_string($conn, $informacoes['descricao']);
+    $corTema = mysqli_real_escape_string($conn, $informacoes['Cor_tema']);
+    $tema = mysqli_real_escape_string($conn, $informacoes['tema']);
+
+    // Trabalhar com uploads
+    $icone = Verificar_Img($_FILES['imagem']);
+    $capa = Verificar_Img($_FILES['capa']);
+
+    if ($icone === false || $capa === false) {
+        return ['status' => 'erro', 'mensagens' => ['Imagens inválidas.']];
+    }
+
+    $pasta = '../Comunidades/Imagens/';
+    if (!is_dir($pasta)) {
+        mkdir($pasta, 0755, true);
+    }
+
+    move_uploaded_file($_FILES['imagem']['tmp_name'], $pasta . $icone);
+    move_uploaded_file($_FILES['capa']['tmp_name'], $pasta . $capa);
+
+    // Agora insere também o nome dos arquivos no banco
+    $query = "INSERT INTO Comunidades (Nome, Descricao, Cor_tema, Tema, ID_Criador, Icone, Capa) 
+              VALUES ('$nome', '$descricao', '$corTema', '$tema', '$idUsuario', '$icone', '$capa')";
+
+    //criaçao do json para visualizaçao
+    $comunidade = [
+        'nome' => $nome,
+        'descricao' => $descricao,
+        'cor_tema' => $corTema,
+        'tema' => $tema,
+        'icone' => $icone,
+        'capa' => $capa,
+        'criador' => $idUsuario,
+        'data_criacao' => date('Y-m-d H:i:s'),
+        'likes' => 0
+    ];
+    $json = json_encode($comunidade, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    $caminho = '../Comunidades/' . $nome . '.json';
+    if (!file_exists($caminho)) {
+        file_put_contents($caminho, $json);
+    } else {
+        return ['status' => 'erro', 'mensagens' => ['Comunidade já existe.']];
+    }
+
+    if (mysqli_query($conn, $query)) {
+        return ['status' => 'ok', 'mensagens' => ['Comunidade criada com sucesso!']];
+    } else {
+        return ['status' => 'erro', 'mensagens' => ['Erro ao criar comunidade.']];
+    }
+}
 
 ?>
